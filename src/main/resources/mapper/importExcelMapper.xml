@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scm.contract.importExcel.repository.ImportExcelMapper">
+    <select id="postImportExcelData" resultType="importExcelDto">
+        SELECT
+        trff_nm, trff_desc,
+        (select cd_v_meaning from tcom.tb_code_definition where cd_v = biz_tcd) as biz_nm,
+        (select cd_v_meaning from tcom.tb_code_definition where cd_v = svc_tcd) as svc_nm,
+        (select cd_v_meaning from tcom.tb_code_definition where cd_v = detl_svc_tcd) as detl_svc_nm,
+        ins_date
+        FROM
+        tcms.tb_cntrt_trff_info
+        WHERE
+        cntrt_id = #{cntrt_id}
+        AND
+        (select cd_v_meaning from tcom.tb_code_definition where cd_v = svc_tcd) LIKE CONCAT('%', #{svc_nm}, '%')
+        AND
+        (select cd_v_meaning from tcom.tb_code_definition where cd_v = detl_svc_tcd) LIKE CONCAT('%', #{detl_svc_nm}, '%')
+    </select>
+</mapper>
