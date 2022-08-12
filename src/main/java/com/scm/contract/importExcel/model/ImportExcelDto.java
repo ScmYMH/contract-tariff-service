@@ -31,10 +31,5 @@ public class ImportExcelDto {
     private String cond_id; //조건Id
     private String cal_unit_cd; //계산단위
     private Integer unit_price; //계약단가
-
-
-
-
-
-
+    private String corp_id;
 }
