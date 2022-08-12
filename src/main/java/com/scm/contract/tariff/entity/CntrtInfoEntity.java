@@ -44,4 +44,8 @@ public class CntrtInfoEntity {
     private String updPersonId;
     @Column(name="corp_id")
     private String corpId;
+    @Column(name="cntrt_typ_gcd")
+    private String cntrtTypGcd; // 계약유형그룹코드
+    @Column(name="cntrt_edit_comment")
+    private String cntrtEditComment; // 수정사유
 }

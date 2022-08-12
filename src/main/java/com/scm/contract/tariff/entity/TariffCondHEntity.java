@@ -18,7 +18,7 @@ public class TariffCondHEntity {
     @Column(name="cntrt_id")
     private String cntrtId; // 계약 ID
     @Column(name="trff_id")
-    private String trffId; // 타리프 ID
+    private Integer trffId; // 타리프 ID
     @Column(name="lcc_cd")
     private String lccCd; // 물류비코드
     @Column(name="sub_lcc_cd")
@@ -41,10 +41,14 @@ public class TariffCondHEntity {
     private String incoCd; // 인도조건코드
     @Column(name="prod_gcd")
     private String prodGcd; // 제품그룹코드
-    @Column(name="arr_type_cd")
-    private String arrTypeCd; // 대권역/소권역/노드그룹/노드 (노드로 default)
+    @Column(name="dep_cd")
+    private String depCd; // 출발지 코드
+    @Column(name="dep_nm")
+    private String depNm; // 출발지명
     @Column(name="arr_cd")
     private String arrCd; // 목적지
+    @Column(name="arr_nm")
+    private String arrNm; // 목적지명
     @Column(name="corp_id")
     private String corpId; // 법인 ID
     @Column(name="del_yn")

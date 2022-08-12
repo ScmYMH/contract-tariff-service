@@ -19,7 +19,7 @@ public class TariffCondValDEntity {
     @Column(name="cntrt_id")
     private String cntrtId; // 계약 ID
     @Column(name="trff_id")
-    private String trffId; // 타리프 ID
+    private Integer trffId; // 타리프 ID
     @Column(name="val_seq_no")
     private Integer valSeqNo; // 일련번호(SEQ발번)
     @Column(name="curr_cnt")
@@ -28,6 +28,8 @@ public class TariffCondValDEntity {
     private String condYn; // 조건등록여부
     @Column(name="cond_id")
     private String condId; // 조건 ID
+    @Column(name="cond_nm")
+    private String condNm; // 조건명
     @Column(name="price_tcd")
     private String priceTcd; // 금액단위
     @Column(name="cal_unit_cd")
