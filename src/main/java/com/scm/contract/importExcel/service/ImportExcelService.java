@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ImportExcelService {
 
-    List<ImportExcelDto> postImportExcelData();
+    List<ImportExcelDto> postImportExcelData(List<ImportExcelDto> importExcelDto);
 }

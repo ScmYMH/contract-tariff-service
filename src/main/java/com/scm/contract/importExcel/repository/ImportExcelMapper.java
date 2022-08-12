@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface ImportExcelMapper {
 
-    List<ImportExcelDto> postImportExcelData();
+    List<ImportExcelDto> postImportExcelData(List<ImportExcelDto> importExcelDto);
 }
