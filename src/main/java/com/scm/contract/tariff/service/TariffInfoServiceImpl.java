@@ -2,8 +2,7 @@ package com.scm.contract.tariff.service;
 
 import com.scm.contract.tcom.repositoy.CodeDefinitionRepository;
 import com.scm.contract.tariff.dto.ReqTariffHeaderPostDto;
-import com.scm.contract.tariff.dto.ResTariffHeaderCondGetDto;
-import com.scm.contract.tariff.dto.ResTariffHeaderPostDto;
+import com.scm.contract.tariff.dto.ResTariffHeaderDto;
 import com.scm.contract.tariff.entity.TariffInfoEntity;
 import com.scm.contract.tariff.repository.TariffInfoRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +24,22 @@ public class TariffInfoServiceImpl implements TariffInfoService{
 
     Date today;
 
-    public ResTariffHeaderCondGetDto getTariffHeaderCond(){
-        ResTariffHeaderCondGetDto resTariffHeaderCondGetDto = new ResTariffHeaderCondGetDto();
-//        resTariffHeaderCondGetDto.setBizTcdArr(codeDefinitionRepository.findAllCdVByCdTpMeaning("사업지역"));
-//        resTariffHeaderCondGetDto.setSvcTcdArr(codeDefinitionRepository.findAllCdVByCdTpMeaning("서비스유형"));
-//        resTariffHeaderCondGetDto.setArApCcdArr(codeDefinitionRepository.findAllCdVByCdTpMeaning("매출매입구분"));
-//        resTariffHeaderCondGetDto.setDetlSvcTcdArr(codeDefinitionRepository.findAllCdVByCdTpMeaning("상세서비스유형"));
-//        System.out.println(resTariffHeaderCondGetDto.toString());
-        return resTariffHeaderCondGetDto;
-    }
+    public ResTariffHeaderDto getTariffHeader(String cntrtId, Integer tariffId){
+        TariffInfoEntity tariffInfoEntity = tariffInfoRepository.findByCntrtIdAndTrffId(cntrtId, tariffId);
 
-    public ResTariffHeaderPostDto postTariffHeader(ReqTariffHeaderPostDto reqTariffHeaderPostDto){
+        return new ResTariffHeaderDto(
+                tariffInfoEntity.getTrffId(),
+                tariffInfoEntity.getCntrtId(),
+                tariffInfoEntity.getSvcTcd(),
+                tariffInfoEntity.getTrffNm(),
+                tariffInfoEntity.getTrffDesc(),
+                tariffInfoEntity.getBizTcd(),
+                tariffInfoEntity.getArApCcd(),
+                tariffInfoEntity.getDetlSvcTcd()
+        );
+
+    }
+    public ResTariffHeaderDto postTariffHeader(ReqTariffHeaderPostDto reqTariffHeaderPostDto){
 
         today = new Date();
 
@@ -61,7 +65,7 @@ public class TariffInfoServiceImpl implements TariffInfoService{
         log.info(String.valueOf(tariffInfoEntity));
         tariffInfoEntity = tariffInfoRepository.save(tariffInfoEntity);
 
-        return new ResTariffHeaderPostDto(
+        return new ResTariffHeaderDto(
                 tariffInfoEntity.getTrffId(),
                 tariffInfoEntity.getCntrtId(),
                 tariffInfoEntity.getSvcTcd(),
@@ -69,11 +73,7 @@ public class TariffInfoServiceImpl implements TariffInfoService{
                 tariffInfoEntity.getTrffDesc(),
                 tariffInfoEntity.getBizTcd(),
                 tariffInfoEntity.getArApCcd(),
-                tariffInfoEntity.getDetlSvcTcd(),
-                tariffInfoEntity.getBizDivCd(),
-                tariffInfoEntity.getCustId(),
-                tariffInfoEntity.getCorpId(),
-                tariffInfoEntity.getDelYn()
+                tariffInfoEntity.getDetlSvcTcd()
         );
     }
 }

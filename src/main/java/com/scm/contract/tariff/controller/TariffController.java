@@ -1,8 +1,6 @@
 package com.scm.contract.tariff.controller;
 
 import com.scm.contract.tariff.dto.*;
-import com.scm.contract.tariff.entity.CntrtInfoEntity;
-import com.scm.contract.tariff.entity.TariffInfoEntity;
 import com.scm.contract.tariff.service.TariffCondHService;
 import com.scm.contract.tariff.service.TariffCondValDService;
 import com.scm.contract.tariff.service.TariffInfoService;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("contract/tariff")
@@ -27,14 +24,29 @@ public class TariffController {
     @Autowired
     TariffCondValDService tariffCondValDService;
 
-    @GetMapping("/header/cond")
-    public ResTariffHeaderCondGetDto getTariffHeaderCond(){
-        return tariffInfoService.getTariffHeaderCond();
+    @GetMapping("/header/{cntrtId}/{tariffId}")
+    public ResTariffHeaderDto getTariffHeader(@PathVariable String cntrtId, @PathVariable Integer tariffId){
+        return tariffInfoService.getTariffHeader(cntrtId, tariffId);
     }
 
     @PostMapping("/header")
-    public ResTariffHeaderPostDto postTariffHeader(@RequestBody ReqTariffHeaderPostDto reqTariffHeaderPostDto){
+    public ResTariffHeaderDto postTariffHeader(@RequestBody ReqTariffHeaderPostDto reqTariffHeaderPostDto){
         return tariffInfoService.postTariffHeader(reqTariffHeaderPostDto);
+    }
+
+    @GetMapping("/{cntrtId}/{tariffId}")
+    public List<ResTariffCondHDto> getTariffCondH(@PathVariable String cntrtId, @PathVariable Integer tariffId){
+        return tariffCondHService.getTariffCondH(cntrtId, tariffId);
+    }
+
+    @PostMapping("")
+    public List<ResTariffCondHDto> postTariffCondH(@RequestBody ReqTariffCondHPostDto reqTariffCondHPostDto){
+        return tariffCondHService.postTariffCondH(reqTariffCondHPostDto);
+    }
+
+    @DeleteMapping("/{seqNoParam}")
+    public List<ResTariffCondHDto> deleteTariffCondH(@PathVariable String seqNoParam){
+        return tariffCondHService.deleteTariffCondH(seqNoParam);
     }
 
     @GetMapping("/searchNode")
@@ -48,8 +60,4 @@ public class TariffController {
         return tariffCondHService.getLccInfo(lccCd, subLccCd, lccCdNm);
     }
 
-    @GetMapping("/{cntrtId}")
-    public List<CntrtInfoEntity> getAllCntrtInfo(@PathVariable String cntrtId){
-        return tariffCondHService.getAllCntrtInfo(cntrtId);
-    }
 }

@@ -1,12 +1,9 @@
 package com.scm.contract.tariff.service;
 
 import com.scm.contract.tariff.dto.ReqTariffHeaderPostDto;
-import com.scm.contract.tariff.dto.ResTariffHeaderCondGetDto;
-import com.scm.contract.tariff.dto.ResTariffHeaderPostDto;
-import com.scm.contract.tariff.entity.TariffInfoEntity;
+import com.scm.contract.tariff.dto.ResTariffHeaderDto;
 
 public interface TariffInfoService {
-    ResTariffHeaderCondGetDto getTariffHeaderCond();
-
-    ResTariffHeaderPostDto postTariffHeader(ReqTariffHeaderPostDto reqTariffHeaderPostDto);
+    ResTariffHeaderDto getTariffHeader(String cntrtId, Integer tariffId);
+    ResTariffHeaderDto postTariffHeader(ReqTariffHeaderPostDto reqTariffHeaderPostDto);
 }

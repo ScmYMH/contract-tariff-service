@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TariffInfoRepository extends JpaRepository<TariffInfoEntity, Integer> {
+
+    TariffInfoEntity findByCntrtIdAndTrffId(String cntrtId, Integer tariffId);
 }
