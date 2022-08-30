@@ -26,6 +26,7 @@ public class TariffController {
 
     @GetMapping("/header/{cntrtId}/{tariffId}")
     public ResTariffHeaderDto getTariffHeader(@PathVariable String cntrtId, @PathVariable Integer tariffId){
+        System.out.println("getTariffHeader 실행");
         return tariffInfoService.getTariffHeader(cntrtId, tariffId);
     }
 
