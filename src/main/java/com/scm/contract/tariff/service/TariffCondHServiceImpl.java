@@ -1,5 +1,6 @@
 package com.scm.contract.tariff.service;
 
+import com.scm.contract.config.SecurityService;
 import com.scm.contract.tariff.dto.*;
 import com.scm.contract.tariff.entity.TariffCondHEntity;
 import com.scm.contract.tariff.entity.TariffCondValDEntity;
@@ -21,7 +22,8 @@ import java.util.*;
 @Service
 @Slf4j
 public class TariffCondHServiceImpl implements TariffCondHService{
-
+    @Autowired
+    SecurityService securityService;
     @Autowired
     TariffCondHRepository tariffCondHRepository;
     @Autowired
@@ -90,6 +92,8 @@ public class TariffCondHServiceImpl implements TariffCondHService{
 
         Date today = new Date();
 
+        String userId = securityService.getIdAtToken();
+
         for(int i = 0; i < trffCondHDtoList.length; i++){
             Optional<TariffCondHEntity> optTariffCondHEntity =  tariffCondHRepository.findById(trffCondHDtoList[i].getSeqNo());
             if(optTariffCondHEntity.isPresent()){
@@ -113,7 +117,7 @@ public class TariffCondHServiceImpl implements TariffCondHService{
                 tariffCondHEntity.setDelYn("N");
                 tariffCondHEntity.setUpdDate(new SimpleDateFormat("yyyyMMdd").format(today));
                 tariffCondHEntity.setUpdTime(new SimpleDateFormat("HHmmss").format(today));
-                tariffCondHEntity.setUpdPersonId("202207130004"); // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                tariffCondHEntity.setUpdPersonId(userId); // 로그인 한 사용자의 id값(token에서 꺼내온 값)
                 tariffCondHRepository.save(tariffCondHEntity);
 
                 Optional<TariffCondValDEntity> optTariffCondValDEntity = tariffCondValDRepository.findById(trffCondHDtoList[i].getSeqNo());
@@ -126,7 +130,7 @@ public class TariffCondHServiceImpl implements TariffCondHService{
                     tariffCondValDEntity.setDelYn("N");
                     tariffCondValDEntity.setUpdDate(new SimpleDateFormat("yyyyMMdd").format(today));
                     tariffCondValDEntity.setUpdTime(new SimpleDateFormat("HHmmss").format(today));
-                    tariffCondValDEntity.setUpdPersonId("202207130004"); // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                    tariffCondValDEntity.setUpdPersonId(userId); // 로그인 한 사용자의 id값(token에서 꺼내온 값)
                     tariffCondValDRepository.save(tariffCondValDEntity);
                 }
             }
@@ -156,10 +160,10 @@ public class TariffCondHServiceImpl implements TariffCondHService{
                     .delYn("N")
                     .insDate(new SimpleDateFormat("yyyyMMdd").format(today))
                     .insTime(new SimpleDateFormat("HHmmss").format(today))
-                    .insPersonId("202207130004") // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                    .insPersonId(userId) // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
                     .updDate(new SimpleDateFormat("yyyyMMdd").format(today))
                     .updTime(new SimpleDateFormat("HHmmss").format(today))
-                    .updPersonId("202207130004") // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                    .updPersonId(userId) // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
                     .build();
             TariffCondHEntity newTariffCondHEntity = tariffCondHRepository.save(tariffCondHEntity);
 
@@ -181,10 +185,10 @@ public class TariffCondHServiceImpl implements TariffCondHService{
                     .delYn("N")
                     .insDate(new SimpleDateFormat("yyyyMMdd").format(today))
                     .insTime(new SimpleDateFormat("HHmmss").format(today))
-                    .insPersonId("202207130004") // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                    .insPersonId(userId) // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
                     .updDate(new SimpleDateFormat("yyyyMMdd").format(today))
                     .updTime(new SimpleDateFormat("HHmmss").format(today))
-                    .updPersonId("202207130004") // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
+                    .updPersonId(userId) // 원래는 로그인 한 사용자의 id값(token에서 꺼내오면 될듯)
                     .build();
             TariffCondValDEntity newTariffCondValDEntity = tariffCondValDRepository.save(tariffCondValDEntity);
             System.out.println("newTariffCondValDEntity seqNo : " + newTariffCondValDEntity.getSeqNo());

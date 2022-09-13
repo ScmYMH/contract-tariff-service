@@ -1,5 +1,6 @@
 package com.scm.contract.tariff.controller;
 
+import com.scm.contract.config.SecurityService;
 import com.scm.contract.tariff.dto.*;
 import com.scm.contract.tariff.service.TariffCondHService;
 import com.scm.contract.tariff.service.TariffCondValDService;
@@ -23,6 +24,9 @@ public class TariffController {
 
     @Autowired
     TariffCondValDService tariffCondValDService;
+
+    @Autowired
+    SecurityService securityService;
 
     @GetMapping("/header/{cntrtId}/{tariffId}")
     public ResTariffHeaderDto getTariffHeader(@PathVariable String cntrtId, @PathVariable Integer tariffId){
@@ -59,6 +63,21 @@ public class TariffController {
     @GetMapping("/searchLcc")
     public List<ResLccInfoGetDto> getLccInfo(@RequestParam String lccCd, @RequestParam String subLccCd, @RequestParam String lccCdNm) {
         return tariffCondHService.getLccInfo(lccCd, subLccCd, lccCdNm);
+    }
+
+    @GetMapping("/allList/{cntrtId}")
+    public List<AllTariffInfoDto> getAllTariffInfo(@PathVariable String cntrtId){
+        return tariffInfoService.getAllTariffInfo(cntrtId);
+    }
+
+    @PostMapping("/copy")
+    public boolean postContractCopy(@RequestBody ReqAllTariffInfoDto reqAllTariffInfoDto){
+        return tariffInfoService.postContractCopy(reqAllTariffInfoDto);
+    }
+
+    @GetMapping("/token")
+    public String checkToken(){
+        return securityService.getIdAtToken();
     }
 
 }
