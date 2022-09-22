@@ -37,4 +37,8 @@ public class DestInfoEntity {
     private String updTime; // 수정시간
     @Column(name="upd_person_id")
     private String updPersonId; //수정자ID
+    @Column(name="latitude")
+    private double latitude;
+    @Column(name="longitude")
+    private double longitude;
 }
