@@ -94,6 +94,39 @@ public class TariffInfoServiceImpl implements TariffInfoService{
         );
     }
 
+    public ResTariffHeaderDto putTariffHeader(ReqTariffHeaderPutDto reqTariffHeaderPutDto){
+        Optional<TariffInfoEntity> optTariffInfoEntity = tariffInfoRepository.findById(reqTariffHeaderPutDto.getTrffId());
+
+        if(optTariffInfoEntity.isPresent()){
+            TariffInfoEntity tariffInfoEntity = optTariffInfoEntity.get();
+            tariffInfoEntity.setCntrtId(reqTariffHeaderPutDto.getCntrtId());
+            tariffInfoEntity.setTrffId(reqTariffHeaderPutDto.getTrffId());
+            tariffInfoEntity.setTrffNm(reqTariffHeaderPutDto.getTrffNm());
+            tariffInfoEntity.setTrffDesc(reqTariffHeaderPutDto.getTrffDesc());
+            tariffInfoEntity.setBizTcd(reqTariffHeaderPutDto.getBizTcd());
+            tariffInfoEntity.setArApCcd(reqTariffHeaderPutDto.getArApCcd());
+            tariffInfoEntity.setSvcTcd(reqTariffHeaderPutDto.getSvcTcd());
+            tariffInfoEntity.setDetlSvcTcd(reqTariffHeaderPutDto.getDetlSvcTcd());
+
+            tariffInfoEntity = tariffInfoRepository.save(tariffInfoEntity);
+
+            return new ResTariffHeaderDto(
+                    tariffInfoEntity.getTrffId(),
+                    tariffInfoEntity.getCntrtId(),
+                    tariffInfoEntity.getSvcTcd(),
+                    tariffInfoEntity.getTrffNm(),
+                    tariffInfoEntity.getTrffDesc(),
+                    tariffInfoEntity.getBizTcd(),
+                    tariffInfoEntity.getArApCcd(),
+                    tariffInfoEntity.getDetlSvcTcd()
+            );
+        }else{
+            return null;
+        }
+
+    }
+
+
     public List<AllTariffInfoDto> getAllTariffInfo(String cntrtId){
         List<TariffInfoEntity> tariffInfoEntityList = tariffInfoRepository.findByCntrtId(cntrtId);
 
@@ -207,8 +240,8 @@ public class TariffInfoServiceImpl implements TariffInfoService{
                             .lccCd(tariffCondHDtoList.get(j).getLccCd())
                             .subLccCd(tariffCondHDtoList.get(j).getSubLccCd())
                             .lccCdDesc(tariffCondHDtoList.get(j).getLccCdDesc())
-                            .trffStatDate(tariffCondHDtoList.get(j).getTrffStatDate())
-                            .trffEndDate(tariffCondHDtoList.get(j).getTrffEndDate())
+                            .trffStatDate(reqAllTariffInfoDto.getCntrtStatDate())
+                            .trffEndDate(reqAllTariffInfoDto.getCntrtEndDate())
                             .cntrtCurrCd(tariffCondHDtoList.get(j).getCntrtCurrCd())
                             .payCurrCd(tariffCondHDtoList.get(j).getPayCurrCd())
                             .incoCd(tariffCondHDtoList.get(j).getIncoCd())

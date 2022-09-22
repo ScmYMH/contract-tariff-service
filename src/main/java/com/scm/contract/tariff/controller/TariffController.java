@@ -3,7 +3,6 @@ package com.scm.contract.tariff.controller;
 import com.scm.contract.config.SecurityService;
 import com.scm.contract.tariff.dto.*;
 import com.scm.contract.tariff.service.TariffCondHService;
-import com.scm.contract.tariff.service.TariffCondValDService;
 import com.scm.contract.tariff.service.TariffInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +22,6 @@ public class TariffController {
     TariffCondHService tariffCondHService;
 
     @Autowired
-    TariffCondValDService tariffCondValDService;
-
-    @Autowired
     SecurityService securityService;
 
     @GetMapping("/header/{cntrtId}/{tariffId}")
@@ -37,6 +33,11 @@ public class TariffController {
     @PostMapping("/header")
     public ResTariffHeaderDto postTariffHeader(@RequestBody ReqTariffHeaderPostDto reqTariffHeaderPostDto){
         return tariffInfoService.postTariffHeader(reqTariffHeaderPostDto);
+    }
+
+    @PutMapping("/header")
+    public ResTariffHeaderDto putTariffHeader(@RequestBody ReqTariffHeaderPutDto reqTariffHeaderPutDto){
+        return tariffInfoService.putTariffHeader(reqTariffHeaderPutDto);
     }
 
     @GetMapping("/{cntrtId}/{tariffId}")

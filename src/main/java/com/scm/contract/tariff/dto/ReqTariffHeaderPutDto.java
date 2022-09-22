@@ -3,8 +3,9 @@ package com.scm.contract.tariff.dto;
 import lombok.Data;
 
 @Data
-public class ReqTariffHeaderPostDto {
+public class ReqTariffHeaderPutDto {
     private String cntrtId; // 계약 ID
+    private Integer trffId; // 타리프 Id
     private String trffNm; // 타리프 Nm
     private String trffDesc; // 타리프 설명
     private String bizTcd; // 사업유형코드
