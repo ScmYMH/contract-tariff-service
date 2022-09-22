@@ -78,6 +78,7 @@ public class TariffController {
 
     @GetMapping("/token")
     public String checkToken(){
+
         return securityService.getIdAtToken();
     }
 
