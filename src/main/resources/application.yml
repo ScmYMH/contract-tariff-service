@@ -1,5 +1,5 @@
 server:
-  port: 9099
+  port: 0
 
 spring:
   application:
@@ -36,9 +36,9 @@ jwt:
   expTime: 864000000
   secret_key: my-very-secret-keymy-very-secret-keymy-very-secret-keymy-very-secret-keymy-very-secret-key
 
-#eureka:
-#  client:
-#    register-with-eureka: true
-#    fetch-registry: true
-#    service-url:
-#      defaultZone: http://3.37.155.50:8761/eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://3.37.155.50:8761/eureka
