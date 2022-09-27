@@ -80,7 +80,10 @@ public class TariffCondHServiceImpl implements TariffCondHService{
         resTariffCondHDtoList.sort(new Comparator<ResTariffCondHDto>() {
             @Override
             public int compare(ResTariffCondHDto o1, ResTariffCondHDto o2) {
-                return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                if(o1.getArrCd().compareTo(o1.getArrCd()) == 0)
+                    return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                else
+                    return o2.getArrCd().compareTo(o1.getArrCd());
             }
         });
         return resTariffCondHDtoList;
@@ -241,7 +244,10 @@ public class TariffCondHServiceImpl implements TariffCondHService{
         resTariffCondHDtoList.sort(new Comparator<ResTariffCondHDto>() {
             @Override
             public int compare(ResTariffCondHDto o1, ResTariffCondHDto o2) {
-                return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                if(o1.getArrCd().compareTo(o1.getArrCd()) == 0)
+                    return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                else
+                    return o2.getArrCd().compareTo(o1.getArrCd());
             }
         });
         return resTariffCondHDtoList;
@@ -313,7 +319,10 @@ public class TariffCondHServiceImpl implements TariffCondHService{
         resTariffCondHDtoList.sort(new Comparator<ResTariffCondHDto>() {
             @Override
             public int compare(ResTariffCondHDto o1, ResTariffCondHDto o2) {
-                return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                if(o1.getArrCd().compareTo(o1.getArrCd()) == 0)
+                    return Integer.parseInt(o2.getTrffEndDate()) - Integer.parseInt(o1.getTrffEndDate());
+                else
+                    return o2.getArrCd().compareTo(o1.getArrCd());
             }
         });
         return resTariffCondHDtoList;
